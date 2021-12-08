@@ -29,24 +29,24 @@ for bi, board in enumerate(boards):
                 memo[num].append((bi, ri, ci))
 
 
-def is_win(grid, row, col):
-    grid[row][col] = -1
-    rs = [int(n) for n in grid[row]]
+def is_win(board, row, col):
+    board[row][col] = -1
+    rs = [int(n) for n in board[row]]
     if sum(rs) == -5:
         return True
-    rc = [row[col] for row in grid]
+    rc = [row[col] for row in board]
     rc = [int(n) for n in rc]
     if sum(rc) == -5:
         return True
     return False
 
 
-def process_winner(grids, grid_indexes):
-    for gi, ri, ci in grid_indexes:
-        grid = grids[gi]
+def process_winner(boards, board_indexes):
+    for bi, ri, ci in board_indexes:
+        board = boards[bi]
 
-        if is_win(grid, ri, ci):
-            w = [(0 if grid[i][j] == -1 else grid[i][j]) for i in range(5) for j in range(5)]
+        if is_win(board, ri, ci):
+            w = [(0 if board[i][j] == -1 else board[i][j]) for i in range(5) for j in range(5)]
             w = [int(n) for n in w]
             return sum(w) * int(num)
     return None
@@ -57,4 +57,4 @@ for num in draw:
 
     if score is not None:
         break
-print(f'Answer: {score}')
+print(score)
